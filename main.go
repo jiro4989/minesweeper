@@ -41,8 +41,12 @@ func drawUI() {
 	for y, row := range board {
 		for x, cell := range row {
 			color := termbox.ColorWhite
-			s := fmt.Sprintf("%d", cell.neighborMineCount)
+			cnt := cell.neighborMineCount
+			s := fmt.Sprintf("%d", cnt)
 			c := []rune(s)[0]
+			if !cell.isOpened {
+				c = ' '
+			}
 			if cell.hasFlag {
 				c = '?'
 			}
@@ -64,7 +68,11 @@ func waitKeyInput() {
 			case termbox.KeyCtrlC, termbox.KeyCtrlD:
 				return
 			case termbox.KeySpace:
-				// TODO
+				x, y := cursor.x, cursor.y
+				board[y][x].isOpened = true
+				if board[y][x].hasBomb {
+					fmt.Println("GAME OVER")
+				}
 			}
 			switch ev.Ch {
 			case 'q':
