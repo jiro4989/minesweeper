@@ -8,15 +8,15 @@ import (
 
 func TestFetchNeighborBomb(t *testing.T) {
 	board := Board{
-		{0, 0, 0, 0, 0},
-		{0, 1, 0, 1, 0},
-		{0, 0, 0, 0, 0},
-		{0, 1, 0, 1, 0},
-		{0, 0, 0, 0, 0},
+		{Mine{hasBomb: false}, Mine{hasBomb: false}, Mine{hasBomb: false}, Mine{hasBomb: false}, Mine{hasBomb: false}},
+		{Mine{hasBomb: false}, Mine{hasBomb: true}, Mine{hasBomb: false}, Mine{hasBomb: true}, Mine{hasBomb: false}},
+		{Mine{hasBomb: false}, Mine{hasBomb: false}, Mine{hasBomb: false}, Mine{hasBomb: false}, Mine{hasBomb: false}},
+		{Mine{hasBomb: false}, Mine{hasBomb: true}, Mine{hasBomb: false}, Mine{hasBomb: true}, Mine{hasBomb: false}},
+		{Mine{hasBomb: false}, Mine{hasBomb: false}, Mine{hasBomb: false}, Mine{hasBomb: false}, Mine{hasBomb: false}},
 	}
-	assert.Equal(t, []MineState{1, 1, 1, 1}, board.fetchNeighborBomb(2, 2))
-	assert.Equal(t, []MineState{1}, board.fetchNeighborBomb(0, 0))
-	assert.Equal(t, []MineState{1}, board.fetchNeighborBomb(4, 0))
-	assert.Equal(t, []MineState{1}, board.fetchNeighborBomb(0, 4))
-	assert.Equal(t, []MineState{1}, board.fetchNeighborBomb(4, 4))
+	assert.Equal(t, []Mine{Mine{hasBomb: true}, Mine{hasBomb: true}, Mine{hasBomb: true}, Mine{hasBomb: true}}, board.fetchNeighborBomb(2, 2))
+	assert.Equal(t, []Mine{Mine{hasBomb: true}}, board.fetchNeighborBomb(0, 0))
+	assert.Equal(t, []Mine{Mine{hasBomb: true}}, board.fetchNeighborBomb(4, 0))
+	assert.Equal(t, []Mine{Mine{hasBomb: true}}, board.fetchNeighborBomb(0, 4))
+	assert.Equal(t, []Mine{Mine{hasBomb: true}}, board.fetchNeighborBomb(4, 4))
 }
