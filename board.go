@@ -10,7 +10,7 @@ type (
 		neighborMineCount int
 		hasBomb           bool
 		isEmpty           bool
-		hasCursor         bool
+		hasFlag           bool
 		isOpened          bool
 	}
 	Board [][]Mine
